@@ -1,0 +1,200 @@
+@import "../../mixins";
+
+:host {
+    width: 100vw;
+    min-height: 100vh;
+    background: beige;
+    border: 2px solid rebeccapurple;
+}
+
+$primary-color: #007bff;
+$dimension: 70px;
+$padding: 5px;
+$select-column-color: pink;
+$select-column-border: magenta;
+$grid-border: #4a4a4a;
+$hover-color: goldenrod;
+
+@mixin rotateLine($angle, $border-color: white) {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    border-bottom: 3px solid $border-color;
+    transform: rotate($angle);
+}
+
+.board-container {
+    padding-top: 10px;
+
+    .board-title {
+        text-align: center;
+        font-style: italic;
+        font-size: 3em;
+    }
+
+    .moves-left{
+        margin-top: 10px;
+        font-size: 1.2em;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        &-label {
+            margin-right: 10px;
+        }
+
+        &-content {
+            margin-right: 10px;
+        }
+    }
+
+    .outcome-container {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        .outcome {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        .btn-reset, .btn-choose-mode {
+            margin-right: 10px;
+            @include blueButton();
+        }
+    }
+
+    .select-column-container {
+        margin-top: 15px;
+        padding: 0 8%;
+        display: flex;
+        justify-content: center;
+
+        .select-column {
+            height: $dimension;
+            border: solid 1px $select-column-border;
+            background: $select-column-color;
+            padding: 0 $padding;
+
+            flex: 1 1 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &:hover {
+                border: solid 3px $hover-color;
+            }
+        }
+    }
+
+    .show {
+        opacity: 1;
+    }
+
+    .hide {
+        opacity: 0;
+    }
+
+    .arrow-down {
+        color: red;
+        width: $dimension;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+            color: $hover-color;
+        }
+    }
+
+    .grid {
+        &-container {
+            margin: 20px 0;
+            padding: 0 8%;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        &-row {
+            width: 100%;
+            flex: 1 1 auto;
+            background: black;
+
+            display: flex;
+        }
+
+        &-cell {
+            flex: 1 1 auto;
+
+            height: 100%;
+            padding: $padding;
+            border: 1px solid $grid-border;
+
+            display: flex;
+            justify-content: center;
+        }
+
+        &-circle {
+            position: relative;
+            border-radius: 50%;
+            width: $dimension;
+            height: $dimension;
+
+            &.free-cell {
+                background: white;
+            }
+
+            &.player1 {
+                background: red;
+            }
+
+            &.player2 {
+                background: yellow;
+            }
+        }
+    }
+
+    .line {
+        &.player1 {
+            @include rotateLine(0deg);
+        }
+
+        &.player2 {
+            @include rotateLine(0deg, black);
+        }
+    }
+
+    .vertical-line {
+        &.player1 {
+            @include rotateLine(90deg);
+        }
+
+        &.player2 {
+            @include rotateLine(90deg, black);
+        }
+    }
+
+    .left-diagonal-line {
+        &.player1 {
+            @include rotateLine(45deg);
+        }
+
+        &.player2 {
+            @include rotateLine(45deg, black);
+        }
+
+    }
+
+    .right-diagonal-line {
+        &.player1 {
+            @include rotateLine(-45deg);
+        }
+
+        &.player2 {
+            @include rotateLine(-45deg, black);
+        }
+
+    }
+}

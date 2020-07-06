@@ -1,0 +1,16 @@
+<div class="shell-container" [class.unknown]="isUnknown">
+    <div class="shell-selection" *ngIf="mode === _Mode.UNKNOWN">
+        <p class="shell-title">Enter game of Connect Four</p>
+        <div class="btn-group">
+            <button class="btn-human" (click)="choose(_Mode.HUMAN_VS_HUMAN)">Human vs Human</button>
+        </div>
+    </div>
+    <ng-container *ngIf="mode !== _Mode.UNKNOWN">
+        <ng-container *ngIf="mode === _Mode.HUMAN_VS_HUMAN then twoPlayers"></ng-container>
+   </ng-container>
+</div>
+<ng-template #twoPlayers>
+    <app-player [name]="'Player 1'" [piece]="_Player.PLAYER1" [color]="_PieceColor.RED"></app-player>
+    <app-main-board [mode]="_Mode.HUMAN_VS_HUMAN"></app-main-board>
+    <app-player [name]="'Player 2'" [piece]="_Player.PLAYER2" [color]="_PieceColor.YELLOW"></app-player>
+</ng-template>

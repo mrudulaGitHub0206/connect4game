@@ -1,0 +1,10 @@
+<div class="name">{{name}}</div>
+<div class="piece-container">
+  <div class="piece" [style.background]="color">
+  </div>
+</div>
+<div class="turn-container" *ngIf="(nextPlayer$ | async); let np;">
+  <p class="turn" *ngIf="np.nextPlayer === piece">Your Turn.</p>
+  <p class="turn" *ngIf="np.nextPlayer === piece">Please make a move</p>
+</div>
+
